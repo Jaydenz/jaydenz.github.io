@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+<!-- Tencent Speed -->
+<script>var _speedMark = new Date()</script>
+<!-- End Tencent Speed -->
+<!-- Tencent Analysis -->
+<script async src="//tajs.qq.com/stats?sId=65843849"></script>
+<!-- End Tencent Analysis -->
+
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Hexo使用说明 | JaydenZ&#39;s Blogs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="教程">
+    <meta name="description" content="简介Hexo是一款基于Node.js的静态博客框架，依赖少易于使用，再加上可以部署到Github上面，成为很多程序员首选的个人博客框架。 安装Hexo依赖于Node.js，下载对应版本的Node.js运行环境安装检查Node.js是否安装成功    node -v检测npm是否安装成功    npm -v安装Hexo    npm install -g hexo-cli初始化博客    进入到自定">
+<meta name="keywords" content="教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo使用说明">
+<meta property="og:url" content="http://yoursite.com/2018/04/06/1.Hexo使用说明/index.html">
+<meta property="og:site_name" content="JaydenZ&#39;s Blogs">
+<meta property="og:description" content="简介Hexo是一款基于Node.js的静态博客框架，依赖少易于使用，再加上可以部署到Github上面，成为很多程序员首选的个人博客框架。 安装Hexo依赖于Node.js，下载对应版本的Node.js运行环境安装检查Node.js是否安装成功    node -v检测npm是否安装成功    npm -v安装Hexo    npm install -g hexo-cli初始化博客    进入到自定">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-19T00:29:18.654Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo使用说明">
+<meta name="twitter:description" content="简介Hexo是一款基于Node.js的静态博客框架，依赖少易于使用，再加上可以部署到Github上面，成为很多程序员首选的个人博客框架。 安装Hexo依赖于Node.js，下载对应版本的Node.js运行环境安装检查Node.js是否安装成功    node -v检测npm是否安装成功    npm -v安装Hexo    npm install -g hexo-cli初始化博客    进入到自定">
+    
+        <link rel="alternate" type="application/atom+xml" title="JaydenZ&#39;s Blogs" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">JaydenZ</h5>
+          <a href="mailto:jaydenz1800@outlook.com" title="jaydenz1800@outlook.com" class="mail">jaydenz1800@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/JaydenZ" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                Friends
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Hexo使用说明</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Hexo使用说明</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-06T04:28:01.000Z" itemprop="datePublished" class="page-time">
+  2018-04-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hexo/">Hexo</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#部署到Github"><span class="post-toc-number">3.</span> <span class="post-toc-text">部署到Github</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hexo命令常见用法"><span class="post-toc-number">4.</span> <span class="post-toc-text">Hexo命令常见用法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编写博文"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">编写博文</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#预览"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">预览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用命令"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">常用命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#发布"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">发布</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#常见问题"><span class="post-toc-number">5.</span> <span class="post-toc-text">常见问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何创建Tags和Categories"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">如何创建Tags和Categories</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何引用图片"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">如何引用图片</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Deployer-not-found-git"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">Deployer not found: git</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调整indigo主题适配宽屏"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">调整indigo主题适配宽屏</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-1.Hexo使用说明"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Hexo使用说明</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-06 12:28:01" datetime="2018-04-06T04:28:01.000Z"  itemprop="datePublished">2018-04-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hexo/">Hexo</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Hexo是一款基于Node.js的静态博客框架，依赖少易于使用，再加上可以部署到Github上面，成为很多程序员首选的个人博客框架。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>Hexo依赖于Node.js，下载对应版本的Node.js运行环境安装<br>检查Node.js是否安装成功<br>    <code>node -v</code><br>检测npm是否安装成功<br>    <code>npm -v</code><br>安装Hexo<br>    <code>npm install -g hexo-cli</code><br>初始化博客<br>    进入到自定义的空目录，输入<br>    <code>hexo init</code></p>
+<h1 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h1><ol>
+<li>登陆Github并新建一个公开仓库，仓库名应该为：用户名.github.io </li>
+<li>安装Git</li>
+<li><p>设置Git，打开命令行，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;你的GitHub用户名&quot;</span><br><span class="line">git config --global user.email &quot;你的GitHub注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成ssh密钥<br><code>ssk-keygen -t rsa</code></p>
+</li>
+<li>进入用户目录的.ssh文件夹中查看id_rsa.pub文件，将其内容复制到Github 博客项目的Settings页面的Deploy keys页面</li>
+</ol>
+<h1 id="Hexo命令常见用法"><a href="#Hexo命令常见用法" class="headerlink" title="Hexo命令常见用法"></a>Hexo命令常见用法</h1><h2 id="编写博文"><a href="#编写博文" class="headerlink" title="编写博文"></a>编写博文</h2><p>在命令行输入<br>    <code>hexo n &quot;博客名字&quot;</code><br>在blog根目录下的source文件夹中的_post文件夹中多了一个博客名字.md文件，然后使用Markdown编辑器进行编辑即可</p>
+<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p>在命令行输入<br>    <code>hexo server</code><br>使用浏览器访问localhost:4000 即可预览博文效果。</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">npm update hexo -g	                      #升级</span><br><span class="line">hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot;  #新建文章</span><br><span class="line">hexo g == hexo generate                   #生成</span><br><span class="line">hexo s == hexo server                     #启动服务预览，Hexo会监视文件变动并自动更新，无须重启服务器</span><br><span class="line">hexo server -s                            #静态模式</span><br><span class="line">hexo server -p 5000                       #更改端口</span><br><span class="line">hexo server -i 192.168.1.1                #自定义IP</span><br><span class="line">hexo d == hexo deploy                     #部署</span><br><span class="line">hexo clean                                #清除缓存，若是网页正常情况下可以忽略这条命令</span><br></pre></td></tr></table></figure>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>写好博文并且样式无误后，在命令输入<br>    <code>hexo g</code><br>    <code>hexo d</code><br>生成、部署网页。随后可以在浏览器中输入域名浏览。</p>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="如何创建Tags和Categories"><a href="#如何创建Tags和Categories" class="headerlink" title="如何创建Tags和Categories"></a>如何创建Tags和Categories</h2><ol>
+<li>首先创建新的页面<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;categories&quot;</span><br><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li>在source文件夹下分别修改相应的index.md文件，将页面的类型设置为 categories | tags<br>categories/index.md<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 分类</span><br><span class="line">date: 2018-4-30 11:59:10</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>tags/index.md<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2018-4-30 11:59:10</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>修改scaffolds文件夹下面的文件<br>scaffolds/draft.md<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">tags: &#123;&#123; tags &#125;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>scaffolds/post.md<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags: &#123;&#123; tags &#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="如何引用图片"><a href="#如何引用图片" class="headerlink" title="如何引用图片"></a>如何引用图片</h2><ol>
+<li>本地绝对引用<br>文章中只用到少量图片时，可以将图片统一放在source/images文件夹中，通过markdown语法访问它们。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#图片路径</span><br><span class="line">source/images/image.jpg</span><br><span class="line">#Markdown引用语法</span><br><span class="line">![](/images/image.jpg)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这样图片既可以在首页内容中访问到，也可以在文章正文中访问到。</p>
+<ol start="2">
+<li>本地相对引用<br>配置_config.yml<br><code>post_asset_folder: true</code><br>执行命令<br><code>$ hexo new post_name</code><br>在source/_posts中会生成文章post_name.md和同名文件夹post_name。将图片资源放在post_name中，文章就可以使用相对路径引用图片资源了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#图片路径</span><br><span class="line">_posts/post_name/image.jpg</span><br><span class="line">#Markdown引用语法</span><br><span class="line">![](image.jpg)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>但是图片只能在文章中显示，但无法在首页中正常显示。<br>如果希望图片在文章和首页中同时显示，可以使用标签插件语法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#图片路径</span><br><span class="line">_posts/post_name/image.jpg</span><br><span class="line">#Markdown引用语法</span><br><span class="line">&#123;% asset_img image.jpg This is an image %&#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>互联网引用<br>申请了CDN或者图片床之后，直接将链接添加到文章即可<h2 id="Deployer-not-found-git"><a href="#Deployer-not-found-git" class="headerlink" title="Deployer not found: git"></a>Deployer not found: git</h2>在终端执行命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>然后继续执行hexo deploye指令进行部署。</p>
+<h2 id="调整indigo主题适配宽屏"><a href="#调整indigo主题适配宽屏" class="headerlink" title="调整indigo主题适配宽屏"></a>调整indigo主题适配宽屏</h2><p>修改hexo-theme-indigo/source/css/_partial/variable.less</p>
+<p>把<code>@contentWidth: 960px;</code>改成<code>@contentWidth: 90%;</code></p>
+<p>修改主题config文件<code>cdn: false</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-19T00:29:18.654Z" itemprop="dateUpdated">2018-05-19 08:29:18</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/04/06/1.Hexo使用说明/" target="_blank" rel="external">http://yoursite.com/2018/04/06/1.Hexo使用说明/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.png" alt="JaydenZ">
+            JaydenZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/06/1.Hexo使用说明/&title=《Hexo使用说明》 — JaydenZ's Blogs&pic=http://yoursite.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/06/1.Hexo使用说明/&title=《Hexo使用说明》 — JaydenZ's Blogs&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/04/06/1.Hexo使用说明/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hexo使用说明》 — JaydenZ's Blogs&url=http://yoursite.com/2018/04/06/1.Hexo使用说明/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/04/06/1.Hexo使用说明/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/01/2.常见开源协议介绍/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">常见开源协议介绍</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>JaydenZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/06/1.Hexo使用说明/&title=《Hexo使用说明》 — JaydenZ's Blogs&pic=http://yoursite.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/06/1.Hexo使用说明/&title=《Hexo使用说明》 — JaydenZ's Blogs&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/04/06/1.Hexo使用说明/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hexo使用说明》 — JaydenZ's Blogs&url=http://yoursite.com/2018/04/06/1.Hexo使用说明/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/04/06/1.Hexo使用说明/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3awY7DIAxF0fz/T2e2lWZC7jOkmpjLqkpb4GRh2ZjjwOP8GL+ffD4f//7q2/HzZUOGDBmvZZzDwTd9NfN4lfH8ZG8yZMjYh0E2Mf8vHo75KjJkyJBBPo9TOhJMay9ChgwZMtKASzZKylQZMmTImClieZBNt5WWvjJkyNiNwU/dv//5kf6GDBkyXsU4w5E2IOefoF3JkCGjNSNN10iK9kiBCloLMmTI6MpIL0nMXIyoJYUouMuQIWMDRm3S2qUxfv0iaE7IkCGjNWPVRLyRQFbk3x5r34cMGTL+MYNf7eIYEoJnkkVUZ8uQIaMdgyzAAyJ/Tbx5ebOiDBkymjI4YL4NWWseoLRVhgwZGzDSLaYJHAnNvDwOGgMyZMhoxCBJ2KoQmR7SIZgMGTJaM9KQx1O92oFaOr8MGTJ2YPBEkAfltPQlof9mNhkyZLRmkLJz/JyA1xa36MqFDBkyGjH4FlNkmiby1/HH6jJkyGjN4KUsn2L+yCxNGWXIkLEDI70MMXM0xpsNcYYrQ4aMDRhPtDN5mZpeILsMuDJkyGjNmFm4duiWBt8btgwZMpoyznDU2pk8lJPjvOC9ypAhowWjFiLT6xTkAC4temuBXoYMGe9lkCBbK0RJgbos4MqQIWMDBm8lpiGSt0V56JchQ4YM3m7kG0obmTxAy5AhQ0YaUnmayEMtuiwrQ4aMDRikiCUYtORMCihDhowtGbVJa23LIIAuvaIhQ4aM1zJ+AMH5LLpwyVhaAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

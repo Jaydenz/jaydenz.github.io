@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+<!-- Tencent Speed -->
+<script>var _speedMark = new Date()</script>
+<!-- End Tencent Speed -->
+<!-- Tencent Analysis -->
+<script async src="//tajs.qq.com/stats?sId=65843849"></script>
+<!-- End Tencent Analysis -->
+
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Linux系统启动流程 | JaydenZ&#39;s Blogs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="原理">
+    <meta name="description" content="前言个人电脑(PC)的出现极大的普及了计算机的应用，从1980年IBM推出了以Intel的x86构架搭配微软的MS-DOS操作系统的PC以来，现代PC的硬件设备几乎都是由Wintel架构垄断的，不过今天我们并不深入探讨历史，而是介绍一下这种构架的电脑启动的原理。 PC启动原理BIOS从按下电源按钮开始，计算机进行加电自检(Power On Self Test ，POST)，POST过后初始化用于启">
+<meta name="keywords" content="原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统启动流程">
+<meta property="og:url" content="http://yoursite.com/2018/05/05/4.Linux系统启动流程/index.html">
+<meta property="og:site_name" content="JaydenZ&#39;s Blogs">
+<meta property="og:description" content="前言个人电脑(PC)的出现极大的普及了计算机的应用，从1980年IBM推出了以Intel的x86构架搭配微软的MS-DOS操作系统的PC以来，现代PC的硬件设备几乎都是由Wintel架构垄断的，不过今天我们并不深入探讨历史，而是介绍一下这种构架的电脑启动的原理。 PC启动原理BIOS从按下电源按钮开始，计算机进行加电自检(Power On Self Test ，POST)，POST过后初始化用于启">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-06T02:17:41.247Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统启动流程">
+<meta name="twitter:description" content="前言个人电脑(PC)的出现极大的普及了计算机的应用，从1980年IBM推出了以Intel的x86构架搭配微软的MS-DOS操作系统的PC以来，现代PC的硬件设备几乎都是由Wintel架构垄断的，不过今天我们并不深入探讨历史，而是介绍一下这种构架的电脑启动的原理。 PC启动原理BIOS从按下电源按钮开始，计算机进行加电自检(Power On Self Test ，POST)，POST过后初始化用于启">
+    
+        <link rel="alternate" type="application/atom+xml" title="JaydenZ&#39;s Blogs" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">JaydenZ</h5>
+          <a href="mailto:jaydenz1800@outlook.com" title="jaydenz1800@outlook.com" class="mail">jaydenz1800@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/JaydenZ" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                Friends
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux系统启动流程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux系统启动流程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-05T04:28:01.000Z" itemprop="datePublished" class="page-time">
+  2018-05-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#PC启动原理"><span class="post-toc-number">2.</span> <span class="post-toc-text">PC启动原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BIOS"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">BIOS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MBR格式磁盘"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">MBR格式磁盘</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#主引导记录"><span class="post-toc-number">2.1.1.1.</span> <span class="post-toc-text">主引导记录</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UEFI"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">UEFI</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GPT格式磁盘"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">GPT格式磁盘</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Linux系统启动流程"><span class="post-toc-number">3.</span> <span class="post-toc-text">Linux系统启动流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-内核的引导"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1.内核的引导</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-启动初始化进程"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.启动初始化进程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-设置运行级别"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.设置运行级别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-系统初始化"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4.系统初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-用户登陆"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5.用户登陆</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#附录"><span class="post-toc-number">5.</span> <span class="post-toc-text">附录</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-4.Linux系统启动流程"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux系统启动流程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-05 12:28:01" datetime="2018-05-05T04:28:01.000Z"  itemprop="datePublished">2018-05-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>个人电脑(PC)的出现极大的普及了计算机的应用，从1980年IBM推出了以Intel的x86构架搭配微软的MS-DOS操作系统的PC以来，现代PC的硬件设备几乎都是由Wintel架构垄断的，不过今天我们并不深入探讨历史，而是介绍一下这种构架的电脑启动的原理。</p>
+<h1 id="PC启动原理"><a href="#PC启动原理" class="headerlink" title="PC启动原理"></a>PC启动原理</h1><h2 id="BIOS"><a href="#BIOS" class="headerlink" title="BIOS"></a>BIOS</h2><p>从按下电源按钮开始，计算机进行加电自检(Power On Self Test ，POST)，POST过后初始化用于启动的硬件（磁盘、键盘控制器等），然后从主板的ROM或Flash芯片中加载基本输入/输出系统(Basic Input/Output System，BIOS)到内存中，进行初始化，随后从CMOS中读取用户自定义的设置，这时候根据设置信息，BIOS通过启动顺序(BootSequence)列表查找对应设备上的启动文件。</p>
+<h3 id="MBR格式磁盘"><a href="#MBR格式磁盘" class="headerlink" title="MBR格式磁盘"></a>MBR格式磁盘</h3><p>在使用MBR格式的磁盘时，这种格式的磁盘第一个扇区保存有主引导记录(Master Boot Becord，MBR)，这个记录有512字节大小，如果最后两个字节是0x55和0xAA，表明这个设备可以用于启动，那么它将接管BIOS传递的控制权，否则，BIOS将查找下一个设备。</p>
+<h4 id="主引导记录"><a href="#主引导记录" class="headerlink" title="主引导记录"></a>主引导记录</h4><p>主引导记录由三部分组成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">第1-446字节：调用操作系统的机器码</span><br><span class="line">第447-510字节：分区表（Partition table）</span><br><span class="line">第511-512字节：主引导记录签名（0x55和0xAA）</span><br></pre></td></tr></table></figure></p>
+<p>由于分区表的长度只有64个字节，一个分区需要占用16个字节，所以MBR格式硬盘最多只能存在四个主分区。MBR格式磁盘的弊端不仅如此：由于主分区只有16个字节，它又由6个部分组成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">第1个字节：如果为0x80，就表示该主分区是激活分区</span><br><span class="line">第2-4个字节：主分区第一个扇区的物理位置（柱面、磁头、扇区号等等）</span><br><span class="line">第5个字节：主分区类型</span><br><span class="line">第6-8个字节：主分区最后一个扇区的物理位置</span><br><span class="line">第9-12字节：该主分区第一个扇区的逻辑地址</span><br><span class="line">第13-16字节：主分区的扇区总数，决定了这个主分区的长度。</span><br></pre></td></tr></table></figure></p>
+<p>扇区总数为最多不超过2的32次方，如果每个扇区为512个字节，就意味着单个分区最大不超过2TB。再考虑到扇区的逻辑地址也是32位，所以单个硬盘可利用的空间最大也不超过2TB。如果想使用更大的硬盘，只有2个方法：一是提高每个扇区的字节数，二是增加扇区总数。为了解决这些问题，人们发明了GPT格式的硬盘。</p>
+<p>继续前面的话题，当BIOS在存储设备找到MBR并且MBR存在启动信息时，这时又会遇到三种情况</p>
+<ol>
+<li>卷引导记录<br>四个主分区里只有一个是激活的，那么计算机会读取激活分区的第一个扇区，叫做卷引导记录(Volume Boot Record，VBR)，它会告诉计算机操作系统所在分区的位置，然后计算机开始加载操作系统</li>
+<li>扩展分区和逻辑分区<br>由于MBR磁盘只能存在四个主分区，但是在硬盘越来越大的今天是远远不够用的，所以，人们把其中一个主分区定义成扩展分区(Extended Partition)，在这个分区中又可以划分出多个逻辑分区(Logical Partition)，理论上可以划分为无数个逻辑分区，每一个逻辑分区都有一个和MBR结构类似的扩展引导记录，如果操作系统安装在扩展分区，计算机会先读取扩展分区的第一个扇区中的扩展引导记录，但是一般很少使用这种方式启动操作系统。</li>
+<li>Bootloader<br>当使用启动管理器时，计算机读取主引导记录前面446字节的机器码之后，不再把控制权转交给某一个分区，而是运行事先安装的启动管理器(Bootloader)，由用户选择启动哪一个操作系统。这也是当今操作系统启动的主流方式。</li>
+</ol>
+<p>在Windows系统中</p>
+<ul>
+<li>Windows NT开始为NTLDR</li>
+<li>Winsows Vista开始为Windows Boot Manager</li>
+</ul>
+<p>在Linux系统中</p>
+<ul>
+<li>CentOS 6为grub legacy</li>
+<li>CentOS 7为grub2</li>
+</ul>
+<hr>
+<h2 id="UEFI"><a href="#UEFI" class="headerlink" title="UEFI"></a>UEFI</h2><p>随着计算机技术的不断进步，老旧的BIOS已经不能适应现在的要求，于是统一可扩展固件接口(Unified Extensible Firmware Interface，UEFI)技术出现了。</p>
+<p>与BIOS相比，UEFI使用模块化理念，它可以加载ESP分区中的EFI应用程序和EFI驱动程序，支持安全启动、GUI等新功能，这些取决于PC制造商是否添加，它还能实现BIOS的兼容模式。只需要把操作系统的引导程序做成一个EFI应用程序就可以使用UEFI加载引导了，如果存在多个操作系统，只需要在UEFI引导界面选择相应的程序就行了。<br>UEFI的启动流程<br>首先系统开机，然后进行自检(Power On Self Test，POST)，随后UEFI 固件被加载，并由它初始化启动要用的硬件。随后启动UEFI引导管理器，它将通过NVRAM中定义的配置决定如何加载UEFI驱动和UEFI可执行文件。已启动的UEFI应用还可以启动其他应用比如bootloader或者启动内核及initramfs，我们只要把操作系统的bootloader做成一个EFI可执行文件，放入EFI分区对应的目录就可以使用UEFI读取启动了。</p>
+<h3 id="GPT格式磁盘"><a href="#GPT格式磁盘" class="headerlink" title="GPT格式磁盘"></a>GPT格式磁盘</h3><p>全局唯一标识分区表(GUID Partition Table，GPT)，与MBR最大4个分区表项的限制相比，GPT对分区数量没有限制，其分区数量只受操作系统限制，GPT可管理硬盘大小达到了18EB。只有基于UEFI平台的主板才支持GPT分区引导启动。</p>
+<hr>
+<h1 id="Linux系统启动流程"><a href="#Linux系统启动流程" class="headerlink" title="Linux系统启动流程"></a>Linux系统启动流程</h1><h2 id="1-内核的引导"><a href="#1-内核的引导" class="headerlink" title="1.内核的引导"></a>1.内核的引导</h2><p>存储设备上的Bootloader接过BIOS的控制权后进行Linux的内核引导，这时根文件系统并未挂载，而内核要读取文件系统就必须要挂载根文件系统，但此时并没有文件系统能提供挂载点，为了解决这个问题内核就先读取存储介质中的初始RAM磁盘(Initialized RAM Disk，initrd)并将其加载到内存作为一个临时的根目录，加载一部分驱动，最重要的是用来挂载真正的根文件系统(这时是以只读方式)，然后切换到真正的根文件系统，完成初始化任务，最后内核会运行第一个程序/sbin/init并将系统控制权交给它。</p>
+<h2 id="2-启动初始化进程"><a href="#2-启动初始化进程" class="headerlink" title="2.启动初始化进程"></a>2.启动初始化进程</h2><p>Linux的init程序经过了好几个版本，以CentOS为例</p>
+<table>
+<thead>
+<tr>
+<th>系统版本</th>
+<th>init程序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CentOS 5及以前</td>
+<td>SysV，配置文件： /etc/inittab</td>
+</tr>
+<tr>
+<td>CentOS 6</td>
+<td>Upstart，配置文件： /etc/inittab, /etc/init/*.conf</td>
+</tr>
+<tr>
+<td>CentOS 7</td>
+<td>Systemd，配置文件： /usr/lib/systemd/system、 /etc/systemd/system</td>
+</tr>
+</tbody>
+</table>
+<p>在使用SysV的系统上,内核文件加载之后，就开始运行第一个程序/sbin/init，它负责初始化系统环境，他的pid为1，其他所有进程都由它衍生，都是他的子进程。<br>在采用systemd的系统上，运行的第一个程序为/usr/lib/systemd/systemd，它的的pid同样为1，也是所有进程的父进程。</p>
+<h2 id="3-设置运行级别"><a href="#3-设置运行级别" class="headerlink" title="3.设置运行级别"></a>3.设置运行级别</h2><p>运行级别用于设定Linux操作系统不同的运行模式，运行级别控制Linux系统通过init程序为不同场合分配不同的开机启动程序。</p>
+<p>Linux系统有7个运行级别(runlevel)：</p>
+<table>
+<thead>
+<tr>
+<th>运行级别</th>
+<th>说明  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>runlevel 0</td>
+<td>系统停机、关机，系统默认运行级别不能设为0，否则不能正常启动</td>
+</tr>
+<tr>
+<td>runlevel 1</td>
+<td>单用户状态，root权限，用于系统维护，禁止远程登陆，无网络连接</td>
+</tr>
+<tr>
+<td>runlevel 2</td>
+<td>多用户状态，无网络连接，不运行守护进程，无NFS</td>
+</tr>
+<tr>
+<td>runlevel 3</td>
+<td>完全的多用户状态，有NFS，登陆后进入控制台命令行模式</td>
+</tr>
+<tr>
+<td>runlevel 4</td>
+<td>系统未使用，保留</td>
+</tr>
+<tr>
+<td>runlevel 5</td>
+<td>多用户，X11控制台，登陆后进入图形GUI模式</td>
+</tr>
+<tr>
+<td>runlevel 6</td>
+<td>系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</td>
+</tr>
+</tbody>
+</table>
+<p>init程序读取/etc/inittab定义的运行级别来进行系统初始化。</p>
+<p>在systemd中runlevel已被target取代，systemd会读取/etc/systemd/system/default.target来决定启动到什么样的target(sysv中称为runlevel)，这是一个符号链接，指向/usr/lib/systemd/system/下相应的target，由于可以实现并行启动，systemd没有严格的启动顺序。在CLI环境default.target指向/lib/systemd/system/multi-user.target，systemd通过读取target文件进行下一步操作，比如运行/usr/lib/systemd/system/sysinit.target开始系统初始化，这些都依赖于相应的target文件中的配置。</p>
+<h2 id="4-系统初始化"><a href="#4-系统初始化" class="headerlink" title="4.系统初始化"></a>4.系统初始化</h2><p>当设置好了runlevel之后，init程序会首先执行/etc/rc.d/rc.sysinit脚本，它是每个runlevel都要执行的重要脚本，它主要进行以下操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.设置主机名称；</span><br><span class="line">2.设置启动的欢迎信息；</span><br><span class="line">3.激活udev和SELinux</span><br><span class="line">4.挂载/etc/fstab文件中定义的所有有效文件系统；</span><br><span class="line">5.激活各个swap设备；</span><br><span class="line">6.检测rootfs，并且以读写的方式重新挂载rootfs；</span><br><span class="line">7.设置系统时间；</span><br><span class="line">8.根据/etc/sysctl.conf文件设置内核参数；</span><br><span class="line">9.激活lvm和软RAID等高级逻辑设备；</span><br><span class="line">10.加载额外的设备的驱动程序；</span><br><span class="line">11.完成清理工作；</span><br></pre></td></tr></table></figure></p>
+<p>然后init程序根据相应的级别加载对应配置的程序，所有由rc脚本关闭或启动的链接文件的源文件都存在于/etc/rc.d/init.d，通过链接的方式放入不同的runlevel文件夹。比如当引导至运行级别 5 时，init 程序会在 /etc/rc.d/rc5.d/ 目录中查看并确定要启动和停止的进程。当init程序启动完对应的程序与守护进程后，这是系统环境基本已经搭建好了。</p>
+<p>在systemd中，/usr/lib/systemd/system/sysinit.target、/usr/lib/systemd/system/basic.target等target会根据对应的依赖关系启动，执行相应的系统初始化任务。</p>
+<h2 id="5-用户登陆"><a href="#5-用户登陆" class="headerlink" title="5.用户登陆"></a>5.用户登陆</h2><p>用户可以通过三种方式登陆Linux</p>
+<ul>
+<li>CLI登陆</li>
+<li>SSH登陆</li>
+<li>GUI登陆</li>
+</ul>
+<p>这几种登陆方式会读取不同的配置文件，在Bash Shell相关博文会做详细介绍。</p>
+<p>用户登陆系统后，开机过程就算完成了。</p>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>简化的Linux系统启动流程</p>
+<p>BIOS + MBR<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST --&gt; BIOS --&gt; MBR --&gt; Bootloader --&gt; kernel + ramdisk --&gt; rootfs(read-only) --&gt; /sbin/init(systemd) --&gt; login</span><br></pre></td></tr></table></figure></p>
+<p>UEFI + GPT<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST --&gt; UEFI --&gt; EFI Application(Bootloader) --&gt; kernel + ramdisk --&gt; rootfs(read-only) --&gt; /sbin/init(systemd) --&gt; login</span><br></pre></td></tr></table></figure></p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>Overview of systemd for RHEL 7：<a href="https://access.redhat.com/articles/754933" target="_blank" rel="noopener">https://access.redhat.com/articles/754933</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-06T02:17:41.247Z" itemprop="dateUpdated">2018-05-06 10:17:41</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/05/05/4.Linux系统启动流程/" target="_blank" rel="external">http://yoursite.com/2018/05/05/4.Linux系统启动流程/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.png" alt="JaydenZ">
+            JaydenZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原理/">原理</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/05/4.Linux系统启动流程/&title=《Linux系统启动流程》 — JaydenZ's Blogs&pic=http://yoursite.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/05/4.Linux系统启动流程/&title=《Linux系统启动流程》 — JaydenZ's Blogs&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/05/4.Linux系统启动流程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux系统启动流程》 — JaydenZ's Blogs&url=http://yoursite.com/2018/05/05/4.Linux系统启动流程/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/05/4.Linux系统启动流程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/07/5.PXE与Kickstart配置/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">PXE与Kickstart配置</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/02/3.解决文件被占用无法删除/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">解决文件被占用无法删除</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>JaydenZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/05/4.Linux系统启动流程/&title=《Linux系统启动流程》 — JaydenZ's Blogs&pic=http://yoursite.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/05/4.Linux系统启动流程/&title=《Linux系统启动流程》 — JaydenZ's Blogs&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/05/4.Linux系统启动流程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux系统启动流程》 — JaydenZ's Blogs&url=http://yoursite.com/2018/05/05/4.Linux系统启动流程/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/05/4.Linux系统启动流程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHUlEQVR42u3aQY7DIAwF0N7/0hlpVrNp+m3TkQKPVdU2hMfCMjavVzyu35F8f/0Z1e/f/WfZwMDAeCzjuh33y00wyRbcvzeiYmBgHMBIXlNdaL5Z796VB3oMDAyMJOTl7Mn2YWBgYCTT3f//Pvgmz2JgYGBMDrH5oXRtfWzxWRwDA+OBjGpj4D8/f7G/gYGB8RDGNR55UzNPBMtrwMDA2JqRHz4nUS6ZIfn1wwoxMDAOYEx4veVWWwujqiEGBsZjGUmK1otvSWjOG5/l2I+BgXEA4z4IVq9cTDYlShMxMDCOYSSP9ZY+mSdqZGJgYGzNyAtnefKXJJ2TxBQDAwMjKXjlSV6yxF6JDQMD4zTGN8JfjlnVVMDAwNibkU86qW71incLUkMMDIyHM/JgtzZoJm3OpABX7ipgYGA8kFE9oFZHuWQ2uJqGgYGxK6NaXKu2ClZdrSjsFgYGxjGMSdEt34i8XfohJcXAwNiaMQmvc3Y1rSyU5zAwMLZjNEtaRWp1y8ptAwwMjGMY1cA6D5o9dqHLgYGBsQWj+kASBHvXxVaVCDEwMHZiXMWRMKqXKiYXLzAwME5grIrWzUnj4N5MDTEwMDZi5EE2TxOTUlrvoIuBgXEyo3fqrV6V6LUzk+3AwMDAmBxN8+sayZzRPREMDIyDGdWQOk83CwEaAwPjAEavGfC9dma5hIeBgbE1Y1K+r17zmjyVbxwGBsZGjB+4yLwqFuJnrQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
