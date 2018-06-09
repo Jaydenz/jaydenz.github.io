@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+<!-- Tencent Speed -->
+<script>var _speedMark = new Date()</script>
+<!-- End Tencent Speed -->
+<!-- Tencent Analysis -->
+<script async src="//tajs.qq.com/stats?sId=65843849"></script>
+<!-- End Tencent Analysis -->
+
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python序列切片操作 | JaydenZ&#39;s Blogs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="原理">
+    <meta name="description" content="Python中的序列序列(Sequence)是Python中的一种数据结构，这种数据结构根据索引来获取序列中的对象。Python3中含有三种内建序列类型：list, tuple, string, range。其中range比较特殊，它是一个生成器，其他几个类型具有的一些序列特性对它并不适合，本篇不做详述。 切片操作切片操作就是对序列按照给定的索引和步长，截取序列中由连续对象组成的片段。对于序列结构">
+<meta name="keywords" content="原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python序列切片操作">
+<meta property="og:url" content="http://yoursite.com/2018/06/09/7.Python列表切片操作/index.html">
+<meta property="og:site_name" content="JaydenZ&#39;s Blogs">
+<meta property="og:description" content="Python中的序列序列(Sequence)是Python中的一种数据结构，这种数据结构根据索引来获取序列中的对象。Python3中含有三种内建序列类型：list, tuple, string, range。其中range比较特殊，它是一个生成器，其他几个类型具有的一些序列特性对它并不适合，本篇不做详述。 切片操作切片操作就是对序列按照给定的索引和步长，截取序列中由连续对象组成的片段。对于序列结构">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-09T14:45:19.097Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python序列切片操作">
+<meta name="twitter:description" content="Python中的序列序列(Sequence)是Python中的一种数据结构，这种数据结构根据索引来获取序列中的对象。Python3中含有三种内建序列类型：list, tuple, string, range。其中range比较特殊，它是一个生成器，其他几个类型具有的一些序列特性对它并不适合，本篇不做详述。 切片操作切片操作就是对序列按照给定的索引和步长，截取序列中由连续对象组成的片段。对于序列结构">
+    
+        <link rel="alternate" type="application/atom+xml" title="JaydenZ&#39;s Blogs" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">JaydenZ</h5>
+          <a href="mailto:jaydenz1800@outlook.com" title="jaydenz1800@outlook.com" class="mail">jaydenz1800@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/JaydenZ" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                Friends
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python序列切片操作</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python序列切片操作</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-09T04:28:01.000Z" itemprop="datePublished" class="page-time">
+  2018-06-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Python中的序列"><span class="post-toc-number">1.</span> <span class="post-toc-text">Python中的序列</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#切片操作"><span class="post-toc-number">2.</span> <span class="post-toc-text">切片操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#切片操作语法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">切片操作语法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#例子"><span class="post-toc-number">3.</span> <span class="post-toc-text">例子</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文档"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考文档</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-7.Python列表切片操作"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python序列切片操作</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-09 12:28:01" datetime="2018-06-09T04:28:01.000Z"  itemprop="datePublished">2018-06-09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Python中的序列"><a href="#Python中的序列" class="headerlink" title="Python中的序列"></a>Python中的序列</h1><p>序列(Sequence)是Python中的一种数据结构，这种数据结构根据索引来获取序列中的对象。<br>Python3中含有三种内建序列类型：list, tuple, string, range。其中range比较特殊，它是一个生成器，其他几个类型具有的一些序列特性对它并不适合，本篇不做详述。</p>
+<h1 id="切片操作"><a href="#切片操作" class="headerlink" title="切片操作"></a>切片操作</h1><p>切片操作就是对序列按照给定的索引和步长，截取序列中由连续对象组成的片段。<br>对于序列结构来说，索引和步长都有正负值，分别表示左右两个方向<br><em>索引的正方向从左往右取值，起始位置为0，有效范围为 [0, 序列长度-1]</em><br><em>索引的负方向从右往左取值，起始位置为-1，有效范围为 [-序列长度, -1]</em><br>因此任意一个序列结构数据的索引范围为<code>-序列长度</code>到<code>序列长度-1</code>范围内的连续整数。</p>
+<p>用图来表示如下，对于一个字符串’Python’，它的正负索引如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字符串    P   y   t   h   o   n</span><br><span class="line">正索引    0   1   2   3   4   5</span><br><span class="line">负索引   -6  -5  -4  -3  -2  -1</span><br></pre></td></tr></table></figure></p>
+<p>理解了序列索引的特点就能很轻松对字符串进行切片。</p>
+<h2 id="切片操作语法"><a href="#切片操作语法" class="headerlink" title="切片操作语法"></a>切片操作语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sequence [start_index: end_index: step]</span><br><span class="line">    start：表示是第一个元素对象，正索引位置默认为0；负索引位置默认为 -序列长度</span><br><span class="line">    end：表示是最后一个元素对象，正索引位置默认为 序列长度－1；负索引位置默认为 -1</span><br><span class="line">    step：步长，end-start，步长为正时，从左向右取值。步长为负时，反向取值，默认为1，步长值不能为0</span><br></pre></td></tr></table></figure>
+<p>*注意：<br>切片的结果不包含结束索引，即不包含最后的一位，-1代表列表的最后一个位置索引</p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>写得再生动还不如一个例子有用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#生成一组列表</span><br><span class="line">L = list(range(21))</span><br><span class="line">&gt;&gt;&gt; L</span><br><span class="line">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]</span><br><span class="line">&gt;&gt;&gt; len(L)</span><br><span class="line">21</span><br></pre></td></tr></table></figure></p>
+<p>索引范围为:-21~20</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">切片操作</th>
+<th>含义</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">L[0]</td>
+<td>取第一个元素</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:left">L[:]</td>
+<td>取一个完整的序列，相当于浅拷贝</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">L[-1]</td>
+<td>取最后一个元素</td>
+<td>20</td>
+</tr>
+<tr>
+<td style="text-align:left">L[1:5]</td>
+<td>截取从索引为1，到索引为5前面的元素</td>
+<td>[1, 2, 3, 4]</td>
+</tr>
+<tr>
+<td style="text-align:left">L[-5:]</td>
+<td>截取后面5个元素</td>
+<td>[16, 17, 18, 19, 20]</td>
+</tr>
+<tr>
+<td style="text-align:left">L[:10:2]</td>
+<td>开始到索引为10的元素(但不包括)，每隔5个取一个元素</td>
+<td>[0, 5]</td>
+</tr>
+<tr>
+<td style="text-align:left">L[::5]</td>
+<td>所有元素，每5个取一个</td>
+<td>[0, 5, 10, 15, 20]</td>
+</tr>
+<tr>
+<td style="text-align:left">L[1::5]</td>
+<td>从索引为1的元素开始到结束，隔5个取一个元素</td>
+<td>[1, 6, 11, 16]</td>
+</tr>
+<tr>
+<td style="text-align:left">L[::-1]</td>
+<td>将列表倒序</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">L[::-4]</td>
+<td>倒序列表后按照step的绝对值间隔取元素</td>
+<td>[20, 16, 12, 8, 4, 0]</td>
+</tr>
+<tr>
+<td style="text-align:left">L[::-3]</td>
+<td>同上</td>
+<td>[20, 17, 14, 11, 8, 5, 2]</td>
+</tr>
+<tr>
+<td style="text-align:left">L[5:0:-1]</td>
+<td>step为负数，逆向访问，切片访问到的正值索引范围为[1:5]</td>
+<td>[5, 4, 3, 2, 1]</td>
+</tr>
+<tr>
+<td style="text-align:left">L[1:6:-1]</td>
+<td>step为负数，逆向访问，切片访问到的正值索引范围为[5:1]，但其中无元素</td>
+<td>[]</td>
+</tr>
+</tbody>
+</table>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a href="https://docs.python.org/3/library/stdtypes.html" target="_blank" rel="noopener">https://docs.python.org/3/library/stdtypes.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-09T14:45:19.097Z" itemprop="dateUpdated">2018-06-09 22:45:19</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/06/09/7.Python列表切片操作/" target="_blank" rel="external">http://yoursite.com/2018/06/09/7.Python列表切片操作/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.png" alt="JaydenZ">
+            JaydenZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原理/">原理</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/06/09/7.Python列表切片操作/&title=《Python序列切片操作》 — JaydenZ's Blogs&pic=http://yoursite.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/06/09/7.Python列表切片操作/&title=《Python序列切片操作》 — JaydenZ's Blogs&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/06/09/7.Python列表切片操作/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python序列切片操作》 — JaydenZ's Blogs&url=http://yoursite.com/2018/06/09/7.Python列表切片操作/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/06/09/7.Python列表切片操作/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/12/6.Ansible教程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Ansible简明教程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>JaydenZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/06/09/7.Python列表切片操作/&title=《Python序列切片操作》 — JaydenZ's Blogs&pic=http://yoursite.com/img/avatar.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/06/09/7.Python列表切片操作/&title=《Python序列切片操作》 — JaydenZ's Blogs&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/06/09/7.Python列表切片操作/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python序列切片操作》 — JaydenZ's Blogs&url=http://yoursite.com/2018/06/09/7.Python列表切片操作/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/06/09/7.Python列表切片操作/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aQXKDMAwFUO5/6XbdaSFfMnQG67HKJAH7sdDIko4jvr4ur/z/v389u+t44sLAwHgtI9ni9TfXmOuN5ut+WBEDA2MA43oTeXA8u6u69XxvGBgYGNXQmT+nty4GBgZGvnwecJNvMDAwMBJGnq6twJLNPX4Wx8DAeCEjr7r//+dH+hsYGBivYnwVr7zQlrckq0H2j11hYGBszcgDXBV5V+DO8RgYGLsy8hvy5mW1MdlrlP74PwYGxhhGUtKqJnlJMa43uoGBgTGHkaeASQOyuuTNwxYYGBibMlZaiSuH26R4l6eqGBgYExh3JXy9GL8yxoGBgTGBkSR8ebhsLt9qHpwmiBgYGNsx8lSv2misJn+9lgAGBsYcRh4E89GKe9ucN0yLYGBgvJyRNwOqh95q4pi3TjEwMGYyksPnSnqXhOC8elbOcDEwMF7LWD985gW76vN7pToMDIz9GL3yfW/AK8dUC3kYGBh7M/LCVtJKrI5N9IbMTl86BgbGMEZ+HK0OajwXuDEwMCYz7gqjeRGtl55iYGBMYOTL99LEXnmuUIbDwMDYlNE7NPYC60rj8wMVAwNja0a1tZk0EvKRsvwJK68JAwNjD0aviFZtMVaLa+U9YGBgDGBUN5QH3+pwarnQhoGBgRGX3pKN9hLEY8WHgYExkpG3BNZbCMlLwcDAmMPImwH5Xb0KXw+GgYGxN6P36LzlmZfSqq8DAwNjAOMbW1wD8XuxmCwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
